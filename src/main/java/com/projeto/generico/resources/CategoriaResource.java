@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projeto.generico.domain.Categoria;
 import com.projeto.generico.services.CategoriaService;
 
-
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
@@ -24,10 +23,9 @@ public class CategoriaResource {
 	//@GetMapping
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		
-		Categoria obj = service.buscar(id);
 
-		return ResponseEntity.ok().body(obj);
-		
+			Categoria obj = service.buscar(id);
+
+			return ResponseEntity.ok().body(obj);
 	}
 }
