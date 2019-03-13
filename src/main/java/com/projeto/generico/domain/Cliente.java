@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,9 +29,11 @@ public class Cliente implements Serializable {
 	private String cpfOutCnpj;
 	private Integer tipo;
 	
-	@OneToMany(mappedBy="endereco")
+	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
+	@ElementCollection
+    @CollectionTable(name="TELEFONE")
 	//Set não aceita repetição
 	private Set<String> telefones = new HashSet<>();
 	
@@ -86,6 +90,25 @@ public class Cliente implements Serializable {
 		this.tipo = tipo.getCod();
 	}
 
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 
 	@Override
 	public int hashCode() {
