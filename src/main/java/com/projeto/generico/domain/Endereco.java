@@ -101,6 +101,27 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
 
 	@Override
 	public int hashCode() {
