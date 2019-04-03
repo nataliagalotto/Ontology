@@ -39,6 +39,8 @@ public class Cliente implements Serializable {
 	//Set não aceita repetição
 	private Set<String> telefones = new HashSet<>();
 	
+	private List<Pedido> pedido = new ArrayList<>();
+	
 	public Cliente() {
 		
 	}
@@ -111,6 +113,14 @@ public class Cliente implements Serializable {
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
+	
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
 
 	@Override
 	public int hashCode() {
@@ -137,6 +147,8 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 }
