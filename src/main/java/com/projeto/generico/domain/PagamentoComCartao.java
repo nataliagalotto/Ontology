@@ -1,9 +1,10 @@
 package com.projeto.generico.domain;
 
-import java.util.Date;
+import javax.persistence.Entity;
 
 import com.projeto.generico.domain.enums.EstadoPagamento;
 
+@Entity
 public class PagamentoComCartao extends Pagamento {
 	
 	private Integer numeroDeParcelas;
