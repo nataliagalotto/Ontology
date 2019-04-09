@@ -13,6 +13,7 @@ import com.projeto.generico.domain.Cidade;
 import com.projeto.generico.domain.Cliente;
 import com.projeto.generico.domain.Endereco;
 import com.projeto.generico.domain.Estado;
+import com.projeto.generico.domain.ItemPedido;
 import com.projeto.generico.domain.Pagamento;
 import com.projeto.generico.domain.PagamentoComBoleto;
 import com.projeto.generico.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.projeto.generico.repositories.CidadeRepository;
 import com.projeto.generico.repositories.ClienteRepository;
 import com.projeto.generico.repositories.EnderecoRepository;
 import com.projeto.generico.repositories.EstadoRepository;
+import com.projeto.generico.repositories.ItemPedidoRepository;
 import com.projeto.generico.repositories.PagamentoRepository;
 import com.projeto.generico.repositories.PedidoRepository;
 import com.projeto.generico.repositories.ProdutoRepository;
@@ -53,6 +55,9 @@ public class GenericoApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 
 	public static void main(String[] args) {
@@ -119,6 +124,20 @@ public class GenericoApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pag1,pag2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
+		
 	}
 
 }
