@@ -11,15 +11,15 @@ import com.projeto.generico.services.exception.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
-	
-	@Autowired 
-	//Vai ser automaticamente instaciada pelo spring
+
+	@Autowired
+	// Vai ser automaticamente instaciada pelo spring
 	private CategoriaRepository repo;
 
-	public Categoria buscar(Integer id) {	
-		
+	public Categoria buscar(Integer id) {
+
 		Optional<Categoria> obj = repo.findById(id);
-		
+
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não entrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
