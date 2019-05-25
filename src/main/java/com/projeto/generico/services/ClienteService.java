@@ -23,4 +23,5 @@ public class ClienteService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não entrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
+
 }
