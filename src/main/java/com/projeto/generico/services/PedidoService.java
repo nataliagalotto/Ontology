@@ -16,7 +16,7 @@ public class PedidoService {
 	//Vai ser automaticamente instaciada pelo spring
 	private PedidoRepository repo;
 
-	public Pedido buscar(Integer id) {	
+	public Pedido find(Integer id) {
 		
 		Optional<Pedido> obj = repo.findById(id);
 		
