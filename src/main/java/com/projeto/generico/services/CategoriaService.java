@@ -1,5 +1,6 @@
 package com.projeto.generico.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.projeto.generico.services.exception.DataIntegrityException;
@@ -44,5 +45,9 @@ public class CategoriaService {
 			throw  new DataIntegrityException("Não é possível excluir uma categoria que possuí produtos");
 		}
 
+	}
+
+	public List<Categoria> findAll(){
+		return repo.findAll();
 	}
 }
