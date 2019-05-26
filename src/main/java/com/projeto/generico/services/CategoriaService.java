@@ -2,7 +2,9 @@ package com.projeto.generico.services;
 
 import java.util.Optional;
 
+import com.projeto.generico.services.exception.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.projeto.generico.domain.Categoria;
@@ -36,6 +38,11 @@ public class CategoriaService {
 
 	public void delete(Integer id){
 		find(id);
-		repo.deleteById(id);
+		try{
+			repo.deleteById(id);
+		}catch (DataIntegrityViolationException e){
+			throw  new DataIntegrityException("Não é possível excluir uma categoria que possuí produtos");
+		}
+
 	}
 }
