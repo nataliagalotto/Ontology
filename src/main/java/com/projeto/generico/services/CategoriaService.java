@@ -23,25 +23,27 @@ public class CategoriaService {
 	// Vai ser automaticamente instaciada pelo spring
 	private CategoriaRepository repo;
 
-	public Categoria find(Integer id) {
+	public Categoria find(final Integer id) {
 
-		Optional<Categoria> obj = repo.findById(id);
+		Optional<Categoria> categoria = repo.findById(id);
 
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		return categoria.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não entrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 
-	public Categoria insert(Categoria obj){
-		obj.setId(null);
-		return repo.save(obj);
+	public Categoria insert(final Categoria categoria){
+        categoria.setId(null);
+		return repo.save(categoria);
 	}
 
-	public Categoria update(Categoria obj){
-		find(obj.getId());
-		return repo.save(obj);
+	public Categoria update(final Categoria  categoria){
+		Categoria newCategoria = find(categoria.getId());
+		updateData(newCategoria,categoria);
+		return repo.save(newCategoria);
 	}
 
-	public void delete(Integer id){
+
+	public void delete(final Integer id){
 		find(id);
 		try{
 			repo.deleteById(id);
@@ -55,13 +57,17 @@ public class CategoriaService {
 		return repo.findAll();
 	}
 
-	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+	public Page<Categoria> findPage(final Integer page, final Integer linesPerPage, final String orderBy, final String direction){
 		PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
 
-	public Categoria fromDTO(CategoriaDTO categoriaDTO){
+	public Categoria fromDTO(final CategoriaDTO categoriaDTO){
 		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
+	}
+
+	private void updateData(final Categoria newCategoria, final Categoria categoria) {
+		newCategoria.setNome(categoria.getNome());
 	}
 
 }
