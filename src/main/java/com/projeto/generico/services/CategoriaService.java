@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.projeto.generico.domain.Categoria;
 import com.projeto.generico.repositories.CategoriaRepository;
 import com.projeto.generico.services.exception.ObjectNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CategoriaService {
@@ -31,6 +32,7 @@ public class CategoriaService {
 				"Objeto não entrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 
+    @Transactional
 	public Categoria insert(final Categoria categoria){
         categoria.setId(null);
 		return repo.save(categoria);
