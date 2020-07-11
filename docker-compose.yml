@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  mysqlsrv:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "my-secret-pw"
+      MYSQL_DATABASE: "root"
+    ports:
+      - "3306:3306"
+    restart: always
+  java:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    expose:
+      - 8080
+    restart: always
+    depends_on:
+      - mysqlsrv
