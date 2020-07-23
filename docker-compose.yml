@@ -5,12 +5,15 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: "my-secret-pw"
-      MYSQL_DATABASE: "root"
+      MYSQL_DATABASE: "generico_db"
+      MYSQL_USER: root
     ports:
       - "3306:3306"
-  java:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
+#  java:
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - db
