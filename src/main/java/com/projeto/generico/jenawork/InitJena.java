@@ -16,9 +16,8 @@ import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 public class InitJena {
 
     private static QueryExecution qe;
-    private static String ontoFile = "FoodRDF.owl";
 
-    public static ResultSet execQuery(String queryString) {
+    public static ResultSet execQuery(String queryString, String ontoFile) {
 
         OntModel ontoModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM, null);
         try {
@@ -67,27 +66,27 @@ public class InitJena {
 //        return list;
 //    }
 
-    public static List<JSONObject> describePoliticians(String queryString) {
-        ResultSet resultSet = execQuery(queryString);
-        List<JSONObject> list = new ArrayList<>();
-        while (resultSet.hasNext()) {
-            JSONObject obj = new JSONObject();
-            QuerySolution solution = resultSet.nextSolution();
-            if (solution.get("Z").toString().split("#")[1].equals("NamedIndividual")){
-                continue;
-            }
-            obj.put("property",solution.get("Y").toString().split("#")[1]);
-            obj.put("object",solution.get("Z").toString().split("#")[1]);
-            list.add(obj);
-        }
+//    public static List<JSONObject> describePoliticians(String queryString) {
+//        ResultSet resultSet = execQuery(queryString);
+//        List<JSONObject> list = new ArrayList<>();
+//        while (resultSet.hasNext()) {
+//            JSONObject obj = new JSONObject();
+//            QuerySolution solution = resultSet.nextSolution();
+//            if (solution.get("Z").toString().split("#")[1].equals("NamedIndividual")){
+//                continue;
+//            }
+//            obj.put("property",solution.get("Y").toString().split("#")[1]);
+//            obj.put("object",solution.get("Z").toString().split("#")[1]);
+//            list.add(obj);
+//        }
+//
+//        // Important ‑ free up resources used running the query
+//        //qe.close();
+//        return list;
+//    }
 
-        // Important ‑ free up resources used running the query
-        //qe.close();
-        return list;
-    }
-
-    public static List<JSONObject> getItems(String queryString) {
-        ResultSet resultSet = execQuery(queryString);
+    public static List<JSONObject> getItems(String queryString, String ontoFile ) {
+        ResultSet resultSet = execQuery(queryString, ontoFile);
         List<JSONObject> list = new ArrayList<>();
         int x=0;
         while (resultSet.hasNext()) {

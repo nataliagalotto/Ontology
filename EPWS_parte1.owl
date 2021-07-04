@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#"
+     xml:base="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Compra -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Compra">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Comprado"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#CompraDe -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#CompraDe">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#VendePara"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Comprado -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Comprado">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Contrata -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Contrata">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#EContratadoPor"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ContrataDe -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ContrataDe">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#OfertaPara"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#EContratadoPor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#EContratadoPor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferece -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferece">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#OfertadoPor"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#OfertaPara -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#OfertaPara">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#OfertadoPor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#OfertadoPor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Possui -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Possui">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Vende -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Vende">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#VendidoPor"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#VendePara -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#VendePara">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#VendidoPor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#VendidoPor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Nome -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Nome">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Preco -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Preco">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Quantidade -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Quantidade">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#QuantidadeItens -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#QuantidadeItens">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteAnonimo -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteAnonimo">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Alimentacao -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Alimentacao">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+        <OfertadoPor rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Burger_King"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Apple -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Apple">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <Vende rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Smartphone"/>
+        <Vende rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tablet"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Burger_King -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Burger_King">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <Oferece rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Alimentacao"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Camiseta -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Camiseta">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Dafiti -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Dafiti">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <Vende rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Camiseta"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Eloneida -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Eloneida">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Genoveva -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Genoveva">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteAnonimo"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Moises -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Moises">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#ClienteRegistrado"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Outback -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Outback">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <Oferece rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Alimentacao"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Riachuelo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Riachuelo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <Vende rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Camiseta"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Samsung -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Samsung">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+        <Vende rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Smartphone"/>
+        <Vende rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tablet"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Smartphone -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Smartphone">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tablet -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tablet">
+        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Produto"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Servico"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Apple"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Burger_King"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Dafiti"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Riachuelo"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Samsung"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
