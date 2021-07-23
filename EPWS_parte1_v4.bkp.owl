@@ -43,43 +43,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#compra -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#compra">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#eCompradoPor"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#eAdicionada -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#eAdicionada">
-        <rdfs:domain rdf:resource="http://purl.org/goodrelations/v1#Offering"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#eCompradoPor -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#eCompradoPor">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#efetuaCompra -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#efetuaCompra">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -102,18 +65,6 @@
     <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente">
         <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/10/swap/pim/contact#Person"/>
     </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#CompraEfetivada -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#CompraEfetivada"/>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Compras -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Compras"/>
     
 
 
@@ -160,33 +111,10 @@
     
 
 
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente_1 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente_1">
-        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
-        <foaf:accountName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">elo.neida</foaf:accountName>
-        <foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eloneida</foaf:name>
-        <foaf:surname rdf:datatype="http://www.w3.org/2001/XMLSchema#string">da Silva</foaf:surname>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente_2 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente_2">
-        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Cliente"/>
-        <foaf:accountName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">po.libio</foaf:accountName>
-        <foaf:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Polibio</foaf:name>
-        <foaf:surname rdf:datatype="http://www.w3.org/2001/XMLSchema#string">de Sousa</foaf:surname>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_1">
         <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche"/>
-        <gr:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BQ 1</gr:name>
     </owl:NamedIndividual>
     
 
@@ -195,7 +123,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_2">
         <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche"/>
-        <gr:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BQ 2</gr:name>
     </owl:NamedIndividual>
     
 
@@ -204,7 +131,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_3">
         <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche"/>
-        <gr:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BQ 3</gr:name>
     </owl:NamedIndividual>
     
 
@@ -213,16 +139,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_4">
         <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche"/>
-        <gr:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Strogonoff</gr:name>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_5 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_5">
-        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche"/>
-        <gr:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Batata Frita</gr:name>
     </owl:NamedIndividual>
     
 
@@ -256,9 +172,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Loja_3">
         <rdf:type rdf:resource="http://purl.org/goodrelations/v1#BusinessEntity"/>
-        <gr:offers rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_1"/>
-        <gr:offers rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_2"/>
-        <gr:offers rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_3"/>
         <gr:category rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fast Food</gr:category>
         <gr:legalName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Burger Queen</gr:legalName>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nó representando a Loja 3 Burger Queen</rdfs:comment>
@@ -284,39 +197,6 @@
         <gr:category rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cafeteria</gr:category>
         <gr:legalName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Moonbucks</gr:legalName>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nó representando a Loja 5 Moonbucks</rdfs:comment>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_1 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_1">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Offering"/>
-        <gr:hasBusinessFunction rdf:resource="http://purl.org/goodrelations/v1#Sell"/>
-        <gr:hasPriceSpecification rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_1"/>
-        <gr:includesObject rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_1"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_2 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_2">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Offering"/>
-        <gr:hasBusinessFunction rdf:resource="http://purl.org/goodrelations/v1#Sell"/>
-        <gr:hasPriceSpecification rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_2"/>
-        <gr:includesObject rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_2"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_3 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Oferta_Lanche_3">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Offering"/>
-        <gr:hasBusinessFunction rdf:resource="http://purl.org/goodrelations/v1#Sell"/>
-        <gr:hasPriceSpecification rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_3"/>
-        <gr:includesObject rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_3"/>
     </owl:NamedIndividual>
     
 
@@ -376,53 +256,12 @@
     
 
 
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#TESTE_Carrinho_1 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#TESTE_Carrinho_1">
-        <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Carrinho"/>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#TV_1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#TV_1">
         <rdf:type rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#TV"/>
         <gr:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Smart TV 4K</gr:name>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nó representando uma tevê 4K</rdfs:comment>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_1 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_1">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#TypeAndQuantityNode"/>
-        <gr:typeOfGood rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_1"/>
-        <gr:amountOfThisGood rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1000.0</gr:amountOfThisGood>
-        <gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_2 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_2">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#TypeAndQuantityNode"/>
-        <gr:typeOfGood rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_2"/>
-        <gr:amountOfThisGood rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.0</gr:amountOfThisGood>
-        <gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_3 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Tipo_Qtd_Lanche_3">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#TypeAndQuantityNode"/>
-        <gr:typeOfGood rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Lanche_3"/>
-        <gr:amountOfThisGood rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.0</gr:amountOfThisGood>
-        <gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
     </owl:NamedIndividual>
     
 
@@ -457,39 +296,6 @@
         <rdf:type rdf:resource="http://purl.org/goodrelations/v1#TypeAndQuantityNode"/>
         <gr:typeOfGood rdf:resource="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#TV_1"/>
         <gr:amountOfThisGood rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1.0</gr:amountOfThisGood>
-        <gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_1 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_1">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#UnitPriceSpecification"/>
-        <gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BRL</gr:hasCurrency>
-        <gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">37.0</gr:hasCurrencyValue>
-        <gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_2 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_2">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#UnitPriceSpecification"/>
-        <gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BRL</gr:hasCurrency>
-        <gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">50.0</gr:hasCurrencyValue>
-        <gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_3 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#Valor_Uni_Lanche_3">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#UnitPriceSpecification"/>
-        <gr:hasCurrency rdf:datatype="http://www.w3.org/2001/XMLSchema#string">BRL</gr:hasCurrency>
-        <gr:hasCurrencyValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">60.0</gr:hasCurrencyValue>
         <gr:hasUnitOfMeasurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C62</gr:hasUnitOfMeasurement>
     </owl:NamedIndividual>
     

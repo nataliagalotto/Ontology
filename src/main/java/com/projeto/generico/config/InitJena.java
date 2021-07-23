@@ -76,11 +76,38 @@ public class InitJena {
             for ( String label : listLabel) {
                 obj.put(label, solution.get(label).toString()
                         .replace("^^<http://www.w3.org/2001/XMLSchema#string>","")
-                        .replace("http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#",""));
+                        .replace("http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#","")
+                        .replace("^^http://www.w3.org/2001/XMLSchema#float",""));
             }
             list.add(obj);
         }
 
+        // Important ‑ free up resources used running the query
+        //qe.close();
+        return list;
+    }
+
+    public static List<JSONObject> getProducts(String queryString, String ontoFile, ArrayList<String> listLabel) {
+        ResultSet resultSet = execQuery(queryString, ontoFile);
+        List<JSONObject> productList = new ArrayList<>();
+        List<JSONObject> list = new ArrayList<>();
+        JSONObject obj = new JSONObject();
+
+        int x=0;
+        while (resultSet.hasNext()) {
+            x++;
+            QuerySolution solution = resultSet.nextSolution();
+
+            for ( String label : listLabel) {
+                obj.put("id",x);
+                obj.put(label, solution.get(label).toString()
+                        .replace("^^<http://www.w3.org/2001/XMLSchema#string>","")
+                        .replace("http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#",""));
+                productList.add(obj);
+            }
+        }
+        obj.put("results",productList);
+        list.add(obj);
         // Important ‑ free up resources used running the query
         //qe.close();
         return list;

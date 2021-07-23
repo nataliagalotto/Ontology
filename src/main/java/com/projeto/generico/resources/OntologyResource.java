@@ -134,6 +134,32 @@ public class OntologyResource {
 		return getItems(queryString, label);
 	}
 
+	@CrossOrigin
+	@GetMapping("/ofertaPorLojas")
+	public List<JSONObject> getOfertaPorLojas(@RequestParam String loja) {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Loja", "Nome", "offering", "Teste", "Preco", "Qtd"));
+
+		String queryString = (prefix +
+				"SELECT ?Loja ?Nome ?offering ?Teste ?Preco ?Qtd\n" +
+				"WHERE{\n" +
+				"    ?Loja gr:offers ?offering.\n" +
+				"    ?Loja gr:legalName \""+loja+"\"^^xsd:string.\n" +
+				"    ?Loja gr:legalName ?Nome.\n" +
+				"    ?Teste rdf:type gr:UnitPriceSpecification.\n" +
+				"    ?offering gr:hasPriceSpecification ?Teste.\n" +
+				"    ?Teste gr:hasCurrencyValue ?Preco. \n" +
+				"    ?Quantidade rdf:type gr:TypeAndQuantityNode.\n" +
+				"    ?offering gr:includesObject ?Quantidade.\n" +
+				"    ?Quantidade gr:amountOfThisGood ?Qtd.\n" +
+				"}"
+		);
+
+		System.out.println(queryString);
+		return InitJena.getItems(queryString, ontoFileEP, label);
+	}
+
 	public List<JSONObject> getItems(String queryString, ArrayList<String> label){
 		System.out.println(queryString);
 		return InitJena.getItems(queryString, ontoFileEP, label);
