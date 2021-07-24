@@ -22,7 +22,7 @@ public class OntologyResource {
 
 	public static final String COMERCIAL_NS = "http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#";
 
-	private static String ontoFileEP = "EPWS_parte1_v4.owl";
+	private static String ontoFileEP = "EPWS_parte1_v6.owl";
 
 	private static String ontoFileFood = "FoodRDF.owl";
 
@@ -139,28 +139,38 @@ public class OntologyResource {
 	public List<JSONObject> getOfertaPorLojas(@RequestParam String loja) {
 
 		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("Loja", "Nome", "offering", "Teste", "Preco", "Qtd"));
+				Arrays.asList("Loja", "Nome", "offering", "Teste", "Preco", "Qtd", "Produto"));
 
 		String queryString = (prefix +
-				"SELECT ?Loja ?Nome ?offering ?Teste ?Preco ?Qtd\n" +
+				"SELECT ?Loja ?Nome ?offering ?Teste ?Preco ?Qtd ?Produto\n" +
 				"WHERE{\n" +
 				"    ?Loja gr:offers ?offering.\n" +
 				"    ?Loja gr:legalName \""+loja+"\"^^xsd:string.\n" +
 				"    ?Loja gr:legalName ?Nome.\n" +
+				"    \n" +
 				"    ?Teste rdf:type gr:UnitPriceSpecification.\n" +
 				"    ?offering gr:hasPriceSpecification ?Teste.\n" +
 				"    ?Teste gr:hasCurrencyValue ?Preco. \n" +
+				"\n" +
 				"    ?Quantidade rdf:type gr:TypeAndQuantityNode.\n" +
 				"    ?offering gr:includesObject ?Quantidade.\n" +
 				"    ?Quantidade gr:amountOfThisGood ?Qtd.\n" +
+				"\n" +
+				"    ?Prd rdf:type gr:ProductOrService.\n" +
+				"    ?Quantidade gr:typeOfGood ?Prd.\n" +
+				"    ?Prd gr:name ?Produto.   \n" +
 				"}"
 		);
 
+		return getItems(queryString, label);
+	}
+
+	public List<JSONObject> getItems(String queryString, ArrayList<String> label){
 		System.out.println(queryString);
 		return InitJena.getItems(queryString, ontoFileEP, label);
 	}
 
-	public List<JSONObject> getItems(String queryString, ArrayList<String> label){
+	public List<JSONObject> getProdutos(String queryString, ArrayList<String> label){
 		System.out.println(queryString);
 		return InitJena.getItems(queryString, ontoFileEP, label);
 	}
