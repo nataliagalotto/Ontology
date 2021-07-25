@@ -31,7 +31,9 @@ public class OntologyResource {
 			"prefix rdfs: <" + RDFS.getURI() + ">\n" +
 			"prefix owl: <" + OWL.getURI() + ">\n" +
 			"prefix gr: <http://purl.org/goodrelations/v1#>\n" +
-			"prefix xsd: <http://www.w3.org/2001/XMLSchema#>\n";
+			"prefix xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+			"prefix foaf: <http://xmlns.com/foaf/0.1/>\n" +
+			"prefix schema: <http://schema.org/>";
 
 	@CrossOrigin
 	@GetMapping("/lojas")
@@ -139,10 +141,9 @@ public class OntologyResource {
 	public List<JSONObject> getOfertaPorLojas(@RequestParam String loja) {
 
 		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("Loja", "Nome", "offering", "Teste", "Preco", "Qtd", "Produto"));
-
+				Arrays.asList("Loja", "Nome", "offering", "Teste", "price", "Qtd", "Produto"));
 		String queryString = (prefix +
-				"SELECT ?Loja ?Nome ?offering ?Teste ?Preco ?Qtd ?Produto\n" +
+				"SELECT ?Loja ?Nome ?offering ?Teste ?price ?Qtd ?Produto\n" +
 				"WHERE{\n" +
 				"    ?Loja gr:offers ?offering.\n" +
 				"    ?Loja gr:legalName \""+loja+"\"^^xsd:string.\n" +
@@ -150,7 +151,7 @@ public class OntologyResource {
 				"    \n" +
 				"    ?Teste rdf:type gr:UnitPriceSpecification.\n" +
 				"    ?offering gr:hasPriceSpecification ?Teste.\n" +
-				"    ?Teste gr:hasCurrencyValue ?Preco. \n" +
+				"    ?Teste gr:hasCurrencyValue ?price. \n" +
 				"\n" +
 				"    ?Quantidade rdf:type gr:TypeAndQuantityNode.\n" +
 				"    ?offering gr:includesObject ?Quantidade.\n" +
@@ -165,13 +166,139 @@ public class OntologyResource {
 		return getItems(queryString, label);
 	}
 
-	public List<JSONObject> getItems(String queryString, ArrayList<String> label){
+	@CrossOrigin
+	@GetMapping("/usuarioPorAccountName")
+	public List<JSONObject> getUsuarioPorAccountName(@RequestParam String accountName) {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Nome", "Surname", "Account"));
+		String queryString = (prefix +
+				"SELECT ?Nome ?Surname ?Account\n" +
+				"WHERE{\n" +
+				"?Usuario rdf:type ccom:Cliente.\n" +
+				"?Usuario foaf:name ?Nome.\n" +
+				"?Usuario foaf:surname ?Surname.\n" +
+				"?Usuario foaf:accountName ?Account.\n" +
+				"?Usuario foaf:accountName \""+accountName+"\"^^xsd:string.\n" +
+				"}"
+		);
+
+		return getItems(queryString, label);
+	}
+
+
+	@CrossOrigin
+	@GetMapping("/inserirCarrinho")
+	public List<JSONObject> inserirCarrinho(@RequestParam String carrinho) {
+		String queryString = (prefix +
+				"INSERT DATA{\n" +
+				" ccom:"+carrinho+" rdf:type ccom:Carrinho. \n" +
+				"}"
+		);
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho\n" +
+				"WHERE{\n" +
+				" ?Carrinho rdf:type ccom:Carrinho.\n" +
+				"}"
+		);
+
+		execInsert(queryString);
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/inserirOfertaNoCarrinho")
+	public List<JSONObject> inserirOfertaNoCarrinho(@RequestParam String carrinho, String oferta ) {
+		String queryString = (prefix +
+				"INSERT DATA{\n" +
+				"    ccom:"+carrinho+" ccom:contemItem ccom:"+oferta+".\n" +
+				"}"
+		);
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho ?Oferta ?Valor ?Item ?Produto\n" +
+				"WHERE{\n" +
+				"  ?Carrinho ccom:contemItem ?Oferta.\n" +
+				"  ?Oferta gr:includesObject ?Valor.\n" +
+				"  ?Valor gr:typeOfGood ?Item.\n" +
+				"  ?Item gr:name ?Produto.\n" +
+				"}"
+		);
+
+		execInsert(queryString);
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/deletarOfertaNoCarrinho")
+	public List<JSONObject> deletarOfertaNoCarrinho(@RequestParam String oferta ) {
+		String queryString = (prefix +
+				"DELETE WHERE{\n" +
+				" ?Oferta ccom:contemItem ccom:"+oferta+".\n" +
+				"}"
+		);
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho ?Oferta ?Valor ?Item ?Produto\n" +
+				"WHERE{\n" +
+				"  ?Carrinho ccom:contemItem ?Oferta.\n" +
+				"  ?Oferta gr:includesObject ?Valor.\n" +
+				"  ?Valor gr:typeOfGood ?Item.\n" +
+				"  ?Item gr:name ?Produto.\n" +
+				"}"
+		);
+
+		execDelete(queryString);
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/inserirObjetoCompra")
+	public List<JSONObject> inserirObjetoCompra(@RequestParam String compra, String cliente, String carrinho ) {
+		String queryString = (prefix +
+				"INSERT DATA{\n" +
+				" ccom:"+compra+" rdf:type ccom:Compras.\n" +
+				" ccom:"+compra+" ccom:temComprador ccom:"+cliente+".\n" +
+				" ccom:"+compra+" ccom:temItem ccom:"+carrinho+".\n" +
+				"}"
+		);
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Compras"));
+
+		String selectString = (prefix +
+				"SELECT ?Compras\n" +
+				"WHERE{\n" +
+				"  ?Compras rdf:type ccom:Compras.\n" +
+				"}"
+		);
+
+		execInsert(queryString);
+		return getItems(selectString, label);
+	}
+
+	public List<JSONObject> getItems(String queryString, ArrayList<String> label) {
 		System.out.println(queryString);
 		return InitJena.getItems(queryString, ontoFileEP, label);
 	}
 
-	public List<JSONObject> getProdutos(String queryString, ArrayList<String> label){
+	public Boolean execInsert(String queryString) {
 		System.out.println(queryString);
-		return InitJena.getItems(queryString, ontoFileEP, label);
+		return InitJena.execInsert2(queryString, ontoFileEP);
+	}
+
+	public Boolean execDelete(String queryString) {
+		System.out.println(queryString);
+		return InitJena.execInsert2(queryString, ontoFileEP);
 	}
 }
