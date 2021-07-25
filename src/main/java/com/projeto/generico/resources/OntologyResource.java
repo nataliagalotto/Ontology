@@ -349,14 +349,7 @@ public class OntologyResource {
 
 	@CrossOrigin
 	@GetMapping("/inserirObjetoCompra")
-	public List<JSONObject> inserirObjetoCompra(@RequestParam String compra, String cliente, String carrinho ) {
-		String queryString = (prefix +
-				"INSERT DATA{\n" +
-				" ccom:"+compra+" rdf:type ccom:Compras.\n" +
-				" ccom:"+compra+" ccom:temComprador ccom:"+cliente+".\n" +
-				" ccom:"+compra+" ccom:temItem ccom:"+carrinho+".\n" +
-				"}"
-		);
+	public List<JSONObject> inserirObjetoCompra(@RequestParam String cliente, String carrinho ) {
 
 		ArrayList<String> label = new ArrayList<String>(
 				Arrays.asList("Compras"));
@@ -368,7 +361,38 @@ public class OntologyResource {
 				"}"
 		);
 
+		int size = getItems(selectString, label).size();
+
+		String queryString = (prefix +
+				"INSERT DATA{\n" +
+				" ccom:compra_"+size+" rdf:type ccom:Compras.\n" +
+				" ccom:compra_"+size+" ccom:temComprador ccom:"+cliente+".\n" +
+				" ccom:compra_"+size+" ccom:temItem ccom:"+carrinho+".\n" +
+				"}"
+		);
+
+
 		execInsert(queryString);
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/compras")
+	public List<JSONObject> compras() {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("compra", "Comprador", "Carrinho", "Item"));
+
+		String selectString = (prefix +
+				"SELECT ?compra ?Comprador ?Carrinho ?Item\n" +
+				"WHERE{\n" +
+				" ?compra rdf:type ccom:Compras. \n" +
+				"  ?compra ccom:temComprador ?Comprador.\n" +
+				"  ?compra ccom:temItem ?Carrinho.\n" +
+				"  ?Carrinho ccom:contemItem ?Item.\n" +
+				"}"
+		);
+
 		return getItems(selectString, label);
 	}
 
