@@ -15,16 +15,9 @@ import java.util.List;
 @RequestMapping(value = "/ontology")
 public class OntologyResource {
 
-	public static final String SOURCE = "./src/main/resources/data/";
-
-	// Pizza ontology namespace
-	public static final String PIZZA_NS = "http://www.co-ode.org/ontologies/pizza/pizza.owl#";
-
 	public static final String COMERCIAL_NS = "http://www.semanticweb.org/alefe/ontologies/2021/4/centro_comercial#";
 
 	private static String ontoFileEP = "EPWS_parte1_v6.owl";
-
-	private static String ontoFileFood = "FoodRDF.owl";
 
 	String prefix = "prefix ccom: <" + COMERCIAL_NS + ">\n" +
 			"prefix rdf: <" + RDF.getURI() + ">\n" +
@@ -33,7 +26,7 @@ public class OntologyResource {
 			"prefix gr: <http://purl.org/goodrelations/v1#>\n" +
 			"prefix xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
 			"prefix foaf: <http://xmlns.com/foaf/0.1/>\n" +
-			"prefix schema: <http://schema.org/>";
+			"prefix schema: <http://schema.org/>\n";
 
 	@CrossOrigin
 	@GetMapping("/lojas")
@@ -98,25 +91,25 @@ public class OntologyResource {
 
 		return getItems(queryString, label);
 	}
-//
-//	@CrossOrigin
-//	@GetMapping("/lojasPorCategoria")
-//	public List<JSONObject> getLojasPorCategoria(@RequestParam String categoria) {
-//
-//		ArrayList<String> label = new ArrayList<String>(
-//				Arrays.asList("entity", "legalname", "category"));
-//
-//		String queryString = ( prefix +
-//				"SELECT ?entity ?legalname ?category\n" +
-//				"WHERE { ?entity rdf:type gr:BusinessEntity.\n" +
-//				" ?entity gr:legalName ?legalname.\n" +
-//				" ?entity gr:category ?category.\n" +
-//				"        ?entity gr:category \""+categoria+"\"^^xsd:string. \n" +
-//				" }"
-//		);
-//
-//		return getItems(queryString, label);
-//	}
+
+	@CrossOrigin
+	@GetMapping("/lojasPorCategoria")
+	public List<JSONObject> getLojasPorCategoria(@RequestParam String categoria) {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("entity", "legalname", "category"));
+
+		String queryString = ( prefix +
+				"SELECT ?entity ?legalname ?category\n" +
+				"WHERE { ?entity rdf:type gr:BusinessEntity.\n" +
+				" ?entity gr:legalName ?legalname.\n" +
+				" ?entity gr:category ?category.\n" +
+				"        ?entity gr:category \""+categoria+"\"^^xsd:string. \n" +
+				" }"
+		);
+
+		return getItems(queryString, label);
+	}
 
 	@CrossOrigin
 	@GetMapping("/lojasPorAtividade")
@@ -189,12 +182,7 @@ public class OntologyResource {
 
 	@CrossOrigin
 	@GetMapping("/inserirCarrinho")
-	public List<JSONObject> inserirCarrinho(@RequestParam String carrinho) {
-		String queryString = (prefix +
-				"INSERT DATA{\n" +
-				" ccom:"+carrinho+" rdf:type ccom:Carrinho. \n" +
-				"}"
-		);
+	public List<JSONObject>  inserirCarrinho() {
 
 		ArrayList<String> label = new ArrayList<String>(
 				Arrays.asList("Carrinho"));
@@ -206,8 +194,45 @@ public class OntologyResource {
 				"}"
 		);
 
+		List<JSONObject> obj  = getItems(selectString, label);
+		int size = obj.size() + 1;
+
+		String queryString = (prefix +
+				"INSERT DATA{\n" +
+				" ccom:carrinho_"+size+" rdf:type ccom:Carrinho. \n" +
+				"}"
+		);
+
 		execInsert(queryString);
-		return getItems(selectString, label);
+		List<JSONObject> list = new ArrayList<>();
+		 list.add(getItems(selectString, label).get(0));
+		 return list;
+	}
+
+	@CrossOrigin
+	@GetMapping("/inserirCarrinho1")
+	public List<JSONObject>  inserirCarrinho1() {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho\n" +
+				"WHERE{\n" +
+				" ?Carrinho rdf:type ccom:Carrinho.\n" +
+				"}"
+		);
+
+		String queryString = (prefix +
+				"INSERT DATA{\n" +
+				" ccom:carrinho_1 rdf:type ccom:Carrinho. \n" +
+				"}"
+		);
+
+		execInsert(queryString);
+		List<JSONObject> list = new ArrayList<>();
+		list.add(getItems(selectString, label).get(0));
+		return list;
 	}
 
 	@CrossOrigin
@@ -263,6 +288,66 @@ public class OntologyResource {
 	}
 
 	@CrossOrigin
+	@GetMapping("/todosOsCarrinhosCompleto")
+	public List<JSONObject> todosOsCarrinhosCompleto() {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho ?Oferta ?Valor ?Item ?Produto\n" +
+				"WHERE{\n" +
+				"  ?Carrinho ccom:contemItem ?Oferta.\n" +
+				"  ?Oferta gr:includesObject ?Valor.\n" +
+				"  ?Valor gr:typeOfGood ?Item.\n" +
+				"  ?Item gr:name ?Produto.\n" +
+				"}"
+		);
+
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/todosOsCarrinhos")
+	public List<JSONObject> todosOsCarrinhos() {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho \n" +
+				"WHERE{\n" +
+				"  ?Carrinho rdf:type ccom:Carrinho.\n" +
+				"}"
+		);
+
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/deletarTodosOsCarrinhos")
+	public List<JSONObject> deletarTodosOsCarrinhos() {
+		String queryString = (prefix +
+				"DELETE WHERE{\n" +
+				"?Carrinho rdf:type ccom:Carrinho.\n" +
+				"}"
+		);
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho \n" +
+				"WHERE{ \n" +
+				" ?Carrinho rdf:type ccom:Carrinho.\n" +
+				"}"
+		);
+
+		execDelete(queryString);
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
 	@GetMapping("/inserirObjetoCompra")
 	public List<JSONObject> inserirObjetoCompra(@RequestParam String compra, String cliente, String carrinho ) {
 		String queryString = (prefix +
@@ -294,11 +379,11 @@ public class OntologyResource {
 
 	public Boolean execInsert(String queryString) {
 		System.out.println(queryString);
-		return InitJena.execInsert2(queryString, ontoFileEP);
+		return InitJena.execUpdate(queryString, ontoFileEP);
 	}
 
 	public Boolean execDelete(String queryString) {
 		System.out.println(queryString);
-		return InitJena.execInsert2(queryString, ontoFileEP);
+		return InitJena.execUpdate(queryString, ontoFileEP);
 	}
 }

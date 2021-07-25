@@ -63,7 +63,7 @@ public class InitJena {
         return null;
     }
 
-    public static Boolean execInsert2(String queryString, String ontoFile) {
+    public static Boolean execUpdate(String queryString, String ontoFile) {
         try {
             OntModel ontoModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM, null);
             ontoModel.read(ontoFile,"RDF/XML");
@@ -81,7 +81,7 @@ public class InitJena {
         return true;
     }
 
-    public static Boolean execInsert(String queryString, String ontoFile) {
+    public static Boolean execUpdateFuseki(String queryString, String ontoFile) {
         // In this variation, a connection is built each time.
         try ( RDFConnectionFuseki conn = (RDFConnectionFuseki)builder.build() ) {
             UpdateRequest request = UpdateFactory.create();
