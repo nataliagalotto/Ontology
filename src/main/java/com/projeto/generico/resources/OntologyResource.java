@@ -134,9 +134,9 @@ public class OntologyResource {
 	public List<JSONObject> getOfertaPorLojas(@RequestParam String loja) {
 
 		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("Loja", "Nome", "offering", "Teste", "price", "Qtd", "Produto"));
+				Arrays.asList("Loja", "Categoria", "Nome", "offering", "Teste", "price", "Qtd", "Produto"));
 		String queryString = (prefix +
-				"SELECT ?Loja ?Nome ?offering ?Teste ?price ?Qtd ?Produto\n" +
+				"SELECT ?Loja ?Categoria ?Nome ?offering ?Teste ?price ?Qtd ?Produto\n" +
 				"WHERE{\n" +
 				"    ?Loja gr:offers ?offering.\n" +
 				"    ?Loja gr:legalName \""+loja+"\"^^xsd:string.\n" +
@@ -153,6 +153,38 @@ public class OntologyResource {
 				"    ?Prd rdf:type gr:ProductOrService.\n" +
 				"    ?Quantidade gr:typeOfGood ?Prd.\n" +
 				"    ?Prd gr:name ?Produto.   \n" +
+				"    ?Loja gr:category ?Categoria.   \n" +
+				"}"
+		);
+
+		return getItems(queryString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/ofertaPorCategoria")
+	public List<JSONObject> getOfertaPorCategoria(@RequestParam String categoria) {
+
+		ArrayList<String> label = new ArrayList<>(
+				Arrays.asList("Loja", "Categoria", "Nome", "offering", "Teste", "price", "Qtd", "Produto"));
+		String queryString = (prefix +
+				"SELECT ?Loja ?Categoria ?Nome ?offering ?Teste ?price ?Qtd ?Produto\n" +
+				"WHERE{\n" +
+				"    ?Loja gr:offers ?offering.\n" +
+				"    ?Loja gr:legalName ?Nome.\n" +
+				"    \n" +
+				"    ?Teste rdf:type gr:UnitPriceSpecification.\n" +
+				"    ?offering gr:hasPriceSpecification ?Teste.\n" +
+				"    ?Teste gr:hasCurrencyValue ?price. \n" +
+				"\n" +
+				"    ?Quantidade rdf:type gr:TypeAndQuantityNode.\n" +
+				"    ?offering gr:includesObject ?Quantidade.\n" +
+				"    ?Quantidade gr:amountOfThisGood ?Qtd.\n" +
+				"\n" +
+				"    ?Prd rdf:type gr:ProductOrService.\n" +
+				"    ?Quantidade gr:typeOfGood ?Prd.\n" +
+				"    ?Prd gr:name ?Produto.   \n" +
+				"    ?Loja gr:category ?Categoria.   \n" +
+				"    ?Loja gr:category \""+categoria+"\"^^xsd:string.   \n" +
 				"}"
 		);
 
