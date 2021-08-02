@@ -28,20 +28,8 @@ public class OntologyResource {
 			"prefix foaf: <http://xmlns.com/foaf/0.1/>\n" +
 			"prefix schema: <http://schema.org/>\n";
 
-	@CrossOrigin
-	@GetMapping("/lojas")
-	public List<JSONObject> getLojasByProduto(@RequestParam String produto) {
-
-		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("Loja"));
-
-		String queryString = ( prefix +
-				"SELECT * { ?Loja ccom:Vende ccom:" + produto +"}"
-		);
-
-		return getItems(queryString, label);
-	}
-
+	//CONSULTA
+	// Por lojas
 	@CrossOrigin
 	@GetMapping("/lojasPorNome")
 	public List<JSONObject> getLojasPorNome() {
@@ -76,42 +64,6 @@ public class OntologyResource {
 	}
 
 	@CrossOrigin
-	@GetMapping("/oferta")
-	public List<JSONObject> getOferta() {
-
-		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("offering", "item"));
-
-		String queryString = ( prefix +
-				"SELECT ?offering ?item \n" +
-				"WHERE { ?offering rdf:type gr:Offering .\n" +
-				"?offering gr:includesObject ?object.\n" +
-				"?object gr:typeOfGood ?item.}"
-		);
-
-		return getItems(queryString, label);
-	}
-
-	@CrossOrigin
-	@GetMapping("/lojasPorCategoria")
-	public List<JSONObject> getLojasPorCategoria(@RequestParam String categoria) {
-
-		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("entity", "legalname", "category"));
-
-		String queryString = ( prefix +
-				"SELECT ?entity ?legalname ?category\n" +
-				"WHERE { ?entity rdf:type gr:BusinessEntity.\n" +
-				" ?entity gr:legalName ?legalname.\n" +
-				" ?entity gr:category ?category.\n" +
-				"        ?entity gr:category \""+categoria+"\"^^xsd:string. \n" +
-				" }"
-		);
-
-		return getItems(queryString, label);
-	}
-
-	@CrossOrigin
 	@GetMapping("/lojasPorAtividade")
 	public List<JSONObject> getLojasPorAtividade() {
 
@@ -124,6 +76,24 @@ public class OntologyResource {
 				" ?x gr:legalName ?Loja.\n" +
 				" ?x gr:category ?Atividade.\n" +
 				" } ORDER BY ?Atividade"
+		);
+
+		return getItems(queryString, label);
+	}
+
+	// Consulta por oferta
+	@CrossOrigin
+	@GetMapping("/oferta")
+	public List<JSONObject> getOferta() {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("offering", "item"));
+
+		String queryString = ( prefix +
+				"SELECT ?offering ?item \n" +
+				"WHERE { ?offering rdf:type gr:Offering .\n" +
+				"?offering gr:includesObject ?object.\n" +
+				"?object gr:typeOfGood ?item.}"
 		);
 
 		return getItems(queryString, label);
@@ -191,6 +161,7 @@ public class OntologyResource {
 		return getItems(queryString, label);
 	}
 
+	//Consulta por usuário
 	@CrossOrigin
 	@GetMapping("/usuarioPorAccountName")
 	public List<JSONObject> getUsuarioPorAccountName(@RequestParam String accountName) {
@@ -211,7 +182,64 @@ public class OntologyResource {
 		return getItems(queryString, label);
 	}
 
+	@CrossOrigin
+	@GetMapping("/todosOsCarrinhosCompleto")
+	public List<JSONObject> todosOsCarrinhosCompleto() {
 
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho ?Oferta ?Valor ?Item ?Produto\n" +
+				"WHERE{\n" +
+				"  ?Carrinho ccom:contemItem ?Oferta.\n" +
+				"  ?Oferta gr:includesObject ?Valor.\n" +
+				"  ?Valor gr:typeOfGood ?Item.\n" +
+				"  ?Item gr:name ?Produto.\n" +
+				"}"
+		);
+
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/todosOsCarrinhos")
+	public List<JSONObject> todosOsCarrinhos() {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho \n" +
+				"WHERE{\n" +
+				"  ?Carrinho rdf:type ccom:Carrinho.\n" +
+				"}"
+		);
+
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/compras")
+	public List<JSONObject> compras() {
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("compra", "Comprador", "Carrinho", "Item"));
+
+		String selectString = (prefix +
+				"SELECT ?compra ?Comprador ?Carrinho ?Item\n" +
+				"WHERE{\n" +
+				" ?compra rdf:type ccom:Compras. \n" +
+				"  ?compra ccom:temComprador ?Comprador.\n" +
+				"  ?compra ccom:temItem ?Carrinho.\n" +
+				"  ?Carrinho ccom:contemItem ?Item.\n" +
+				"}"
+		);
+
+		return getItems(selectString, label);
+	}
+
+	// INSERÇÃO
 	@CrossOrigin
 	@GetMapping("/inserirCarrinho")
 	public List<JSONObject>  inserirCarrinho() {
@@ -294,92 +322,6 @@ public class OntologyResource {
 	}
 
 	@CrossOrigin
-	@GetMapping("/deletarOfertaNoCarrinho")
-	public List<JSONObject> deletarOfertaNoCarrinho(@RequestParam String oferta ) {
-		String queryString = (prefix +
-				"DELETE WHERE{\n" +
-				" ?Oferta ccom:contemItem ccom:"+oferta+".\n" +
-				"}"
-		);
-
-		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
-
-		String selectString = (prefix +
-				"SELECT ?Carrinho ?Oferta ?Valor ?Item ?Produto\n" +
-				"WHERE{\n" +
-				"  ?Carrinho ccom:contemItem ?Oferta.\n" +
-				"  ?Oferta gr:includesObject ?Valor.\n" +
-				"  ?Valor gr:typeOfGood ?Item.\n" +
-				"  ?Item gr:name ?Produto.\n" +
-				"}"
-		);
-
-		execDelete(queryString);
-		return getItems(selectString, label);
-	}
-
-	@CrossOrigin
-	@GetMapping("/todosOsCarrinhosCompleto")
-	public List<JSONObject> todosOsCarrinhosCompleto() {
-
-		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
-
-		String selectString = (prefix +
-				"SELECT ?Carrinho ?Oferta ?Valor ?Item ?Produto\n" +
-				"WHERE{\n" +
-				"  ?Carrinho ccom:contemItem ?Oferta.\n" +
-				"  ?Oferta gr:includesObject ?Valor.\n" +
-				"  ?Valor gr:typeOfGood ?Item.\n" +
-				"  ?Item gr:name ?Produto.\n" +
-				"}"
-		);
-
-		return getItems(selectString, label);
-	}
-
-	@CrossOrigin
-	@GetMapping("/todosOsCarrinhos")
-	public List<JSONObject> todosOsCarrinhos() {
-
-		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("Carrinho"));
-
-		String selectString = (prefix +
-				"SELECT ?Carrinho \n" +
-				"WHERE{\n" +
-				"  ?Carrinho rdf:type ccom:Carrinho.\n" +
-				"}"
-		);
-
-		return getItems(selectString, label);
-	}
-
-	@CrossOrigin
-	@GetMapping("/deletarTodosOsCarrinhos")
-	public List<JSONObject> deletarTodosOsCarrinhos() {
-		String queryString = (prefix +
-				"DELETE WHERE{\n" +
-				"?Carrinho rdf:type ccom:Carrinho.\n" +
-				"}"
-		);
-
-		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
-
-		String selectString = (prefix +
-				"SELECT ?Carrinho \n" +
-				"WHERE{ \n" +
-				" ?Carrinho rdf:type ccom:Carrinho.\n" +
-				"}"
-		);
-
-		execDelete(queryString);
-		return getItems(selectString, label);
-	}
-
-	@CrossOrigin
 	@GetMapping("/inserirObjetoCompra")
 	public List<JSONObject> inserirObjetoCompra(@RequestParam String cliente, String carrinho ) {
 
@@ -408,23 +350,54 @@ public class OntologyResource {
 		return getItems(selectString, label);
 	}
 
+	//DELETAR
+
 	@CrossOrigin
-	@GetMapping("/compras")
-	public List<JSONObject> compras() {
-
-		ArrayList<String> label = new ArrayList<String>(
-				Arrays.asList("compra", "Comprador", "Carrinho", "Item"));
-
-		String selectString = (prefix +
-				"SELECT ?compra ?Comprador ?Carrinho ?Item\n" +
-				"WHERE{\n" +
-				" ?compra rdf:type ccom:Compras. \n" +
-				"  ?compra ccom:temComprador ?Comprador.\n" +
-				"  ?compra ccom:temItem ?Carrinho.\n" +
-				"  ?Carrinho ccom:contemItem ?Item.\n" +
+	@GetMapping("/deletarOfertaNoCarrinho")
+	public List<JSONObject> deletarOfertaNoCarrinho(@RequestParam String oferta ) {
+		String queryString = (prefix +
+				"DELETE WHERE{\n" +
+				" ?Oferta ccom:contemItem ccom:"+oferta+".\n" +
 				"}"
 		);
 
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho ?Oferta ?Valor ?Item ?Produto\n" +
+				"WHERE{\n" +
+				"  ?Carrinho ccom:contemItem ?Oferta.\n" +
+				"  ?Oferta gr:includesObject ?Valor.\n" +
+				"  ?Valor gr:typeOfGood ?Item.\n" +
+				"  ?Item gr:name ?Produto.\n" +
+				"}"
+		);
+
+		execDelete(queryString);
+		return getItems(selectString, label);
+	}
+
+	@CrossOrigin
+	@GetMapping("/deletarTodosOsCarrinhos")
+	public List<JSONObject> deletarTodosOsCarrinhos() {
+		String queryString = (prefix +
+				"DELETE WHERE{\n" +
+				"?Carrinho rdf:type ccom:Carrinho.\n" +
+				"}"
+		);
+
+		ArrayList<String> label = new ArrayList<String>(
+				Arrays.asList("Carrinho", "Oferta", "Valor", "Item", "Produto"));
+
+		String selectString = (prefix +
+				"SELECT ?Carrinho \n" +
+				"WHERE{ \n" +
+				" ?Carrinho rdf:type ccom:Carrinho.\n" +
+				"}"
+		);
+
+		execDelete(queryString);
 		return getItems(selectString, label);
 	}
 
